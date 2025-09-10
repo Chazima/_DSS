@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFSS - Upload Files</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/upload.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-database"></i> DFSS</h1>
+                <p>User Dashboard</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="files.html"><i class="fas fa-file-alt"></i> My Files</a>
+                    </li>
+                    <li class="active">
+                        <a href="upload.html"><i class="fas fa-upload"></i> Upload</a>
+                    </li>
+           
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>Upload Files</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="username">User</span>
+                        <img src="/frontend/profile.jpg" alt="User Avatar" class="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Upload Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-cloud-upload-alt"></i> Upload Files</h3>
+                    </div>
+                    <div class="card">
+                        <div class="upload-container">
+                            <form id="uploadForm" class="upload-form">
+                                <div class="upload-dropzone" id="uploadDropzone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Drag & drop files here or click to browse</p>
+                                    <input type="file" id="fileInput" class="file-input" multiple>
+                                </div>
+                                
+                                <div class="selected-files" id="selectedFiles">
+                                    <div class="no-files-message">No files selected</div>
+                                </div>
+                                
+                                <div class="upload-options">
+                                    <div class="option-group">
+                                        <label for="encryptFiles">
+                                            <input type="checkbox" id="encryptFiles" checked>
+                                            Encrypt files
+                                        </label>
+                                        <div class="option-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <div class="option-tooltip">
+                                                Files will be encrypted before storage for enhanced security
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="option-group">
+                                        <label for="redundancyLevel">Redundancy Level:</label>
+                                        <select id="redundancyLevel" class="option-select">
+                                            <option value="standard">Standard (2x)</option>
+                                            <option value="high">High (3x)</option>
+                                        </select>
+                                        <div class="option-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <div class="option-tooltip">
+                                                Higher redundancy means more copies of your files are stored across different nodes
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                                    <div class="progress-header">
+                                        <span id="progressFileName">Uploading...</span>
+                                        <span id="progressPercentage">0%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                                    </div>
+                                    <div class="progress-status" id="progressStatus">
+                                        Preparing files...
+                                    </div>
+                                </div>
+                                
+                                <div class="upload-actions">
+                                    <button type="button" id="cancelUploadBtn" class="btn-secondary" disabled>
+                                        <i class="fas fa-times"></i> Cancel
+                                    </button>
+                                    <button type="submit" id="uploadBtn" class="btn-primary" disabled>
+                                        <i class="fas fa-upload"></i> Upload Files
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload History Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-history"></i> Recent Uploads</h3>
+                    </div>
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Filename</th>
+                                        <th>Size</th>
+                                        <th>Upload Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentUploadsTable">
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <div class="loading-spinner">
+                                                <i class="fas fa-spinner fa-spin"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/upload.js"></script>
+</body>
+</html>

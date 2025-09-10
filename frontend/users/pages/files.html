@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFSS - My Files</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/files.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-database"></i> DFSS</h1>
+                <p>User Dashboard</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="files.html"><i class="fas fa-file-alt"></i> My Files</a>
+                    </li>
+                    <li>
+                        <a href="upload.html"><i class="fas fa-upload"></i> Upload</a>
+                    </li>
+                  
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>My Files</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="username">User</span>
+                        <img src="/frontend/profile.jpg" alt="User Avatar" class="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Files Management Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-alt"></i> All Files</h3>
+                        <div class="search-container">
+                            <input type="text" id="fileSearch" placeholder="Search files..." class="search-input">
+                            <button id="searchBtn" class="btn-search">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="file-filters">
+                            <div class="filter-group">
+                                <label for="sortBy">Sort by:</label>
+                                <select id="sortBy" class="filter-select">
+                                    <option value="date-desc">Date (Newest)</option>
+                                    <option value="date-asc">Date (Oldest)</option>
+                                    <option value="name-asc">Name (A-Z)</option>
+                                    <option value="name-desc">Name (Z-A)</option>
+                                    <option value="size-desc">Size (Largest)</option>
+                                    <option value="size-asc">Size (Smallest)</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="fileType">File Type:</label>
+                                <select id="fileType" class="filter-select">
+                                    <option value="all">All Types</option>
+                                    <option value="image">Images</option>
+                                    <option value="document">Documents</option>
+                                    <option value="video">Videos</option>
+                                    <option value="audio">Audio</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="view-toggle">
+                                <button id="gridViewBtn" class="view-btn active">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button id="listViewBtn" class="view-btn">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Grid View -->
+                        <div id="gridView" class="files-grid">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+
+                        <!-- List View -->
+                        <div id="listView" class="table-responsive" style="display: none;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Filename</th>
+                                        <th>Size</th>
+                                        <th>Upload Date</th>
+                                        <th>Type</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="filesTable">
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <div class="loading-spinner">
+                                                <i class="fas fa-spinner fa-spin"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pagination-container" id="paginationContainer">
+                            <!-- Pagination will be added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- File Details Modal -->
+    <div class="modal" id="fileDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>File Details</h3>
+                <button class="modal-close" id="closeFileDetailsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="fileDetailsContent">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share File Modal -->
+    <div class="modal" id="shareFileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share File</h3>
+                <button class="modal-close" id="closeShareFileModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="share-options">
+                    <div class="share-link-container">
+                        <label for="shareLink">Share Link:</label>
+                        <div class="share-link-input">
+                            <input type="text" id="shareLink" readonly>
+                            <button id="copyLinkBtn" class="btn-copy">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div class="share-settings">
+                        <div class="setting-group">
+                            <label for="expiryDate">Link Expiry:</label>
+                            <select id="expiryDate" class="setting-select">
+                                <option value="never">Never</option>
+                                <option value="1">1 Day</option>
+                                <option value="7">7 Days</option>
+                                <option value="30">30 Days</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="passwordProtect">
+                                Password Protect
+                            </label>
+                            <div id="passwordContainer" class="password-container" style="display: none;">
+                                <input type="password" id="sharePassword" placeholder="Enter password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="share-actions">
+                        <button id="updateShareBtn" class="btn-primary">
+                            <i class="fas fa-save"></i> Update Share Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/files.js"></script>
+</body>
+</html>

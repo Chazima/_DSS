@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Register</title>
+    <!-- Linking the CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Linking the JavaScript file -->
+    <script defer src="animations.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="form-container">
+            <!-- Login Form -->
+            <div class="login-form">
+            
+                <h2>Login to Your Account</h2>
+                <form method="POST" action="login_action.php">
+                    <div class="input-group">
+                        <i class='bx bxs-user'></i>
+                        <label for="username">Username</label>
+                        
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        
+                    </div>
+                    <div class="input-group">
+                        
+                        <i class='bx bxs-lock-alt'></i>
+                        <label for="password">Password</label> 
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn-login">Login</button>
+                    <p class="toggle-form">Don't have an account? <span id="show-register">Register here</span></p>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div class="register-form hidden">
+                <h2>Create an Account</h2>
+                <form method="POST" action="register_action.php">
+                    <div class="input-group">
+                        <label for="new-username">Username</label>
+                        <input type="text" id="new-username" name="username" placeholder="Enter a username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="new-password">Password</label>
+                        <input type="password" id="new-password" name="password" placeholder="Enter a password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn-register">Register</button>
+                    <p class="toggle-form">Already have an account? <span id="show-login">Login here</span></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

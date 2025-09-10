@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFSS Admin - System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/system.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-database"></i> DFSS</h1>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="files.html"><i class="fas fa-file-alt"></i> Files</a>
+                    </li>
+                    <li>
+                        <a href="users.html"><i class="fas fa-users"></i> Users</a>
+                    </li>
+                    <li class="active">
+                        <a href="system.html"><i class="fas fa-server"></i> System</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>System Management</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="username">Admin</span>
+                        <img src="/frontend/profile.jpg" alt="User Avatar" class="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- System Overview Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-info-circle"></i> System Overview</h3>
+                        <button id="refreshSystem" class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-icon blue">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Total Users</h3>
+                                <p id="totalUsers">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon green">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Total Chunks</h3>
+                                <p id="totalFiles">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon purple">
+                                <i class="fas fa-hdd"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Storage Used</h3>
+                                <p id="storageUsed">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon orange">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Active Nodes</h3>
+                                <p id="activeNodes">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Node Management Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-server"></i> Node Management</h3>
+                    </div>
+                    <div class="card">
+                        <div class="node-management-container" id="nodeManagementContainer">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Actions Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-cogs"></i> System Actions</h3>
+                    </div>
+                    <div class="card">
+                        <div class="system-actions">
+                            <div class="action-card">
+                                <div class="action-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="action-content">
+                                    <h4>Simulate Node Failure</h4>
+                                    <p>Simulate a node failure to test system resilience</p>
+                                    <div class="action-controls">
+                                        <select id="failNodeSelect" class="action-select">
+                                            <option value="">Select Node</option>
+                                        </select>
+                                        <button id="simulateFailureBtn" class="btn-action btn-warning">
+                                            <i class="fas fa-bolt"></i> Simulate Failure
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="action-card">
+                                <div class="action-icon">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <div class="action-content">
+                                    <h4>Repair Node</h4>
+                                    <p>Restore a failed node and repair missing chunks</p>
+                                    <div class="action-controls">
+                                        <select id="repairNodeSelect" class="action-select">
+                                            <option value="">Select Node</option>
+                                        </select>
+                                        <button id="repairNodeBtn" class="btn-action btn-success">
+                                            <i class="fas fa-tools"></i> Repair Node
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/system.js" type="module"></script>
+</body>
+</html>

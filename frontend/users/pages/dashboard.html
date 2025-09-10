@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFSS - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-database"></i> DFSS</h1>
+                <p>User Dashboard</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="files.html"><i class="fas fa-file-alt"></i> My Files</a>
+                    </li>
+                    <li>
+                        <a href="upload.html"><i class="fas fa-upload"></i> Upload</a>
+                    </li>
+                   
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="username">User</span>
+                        <img src="/frontend/profile.jpg" alt="User Avatar" class="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Storage Overview Cards -->
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon blue">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>My Files</h3>
+                            <p id="totalFiles">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon green">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Storage Used</h3>
+                            <p id="storageUsed">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon purple">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Storage Limit</h3>
+                            <p id="storageLimit">Loading...</p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!-- Storage Usage Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-chart-pie"></i> Storage Usage</h3>
+                    </div>
+                    <div class="card">
+                        <div class="storage-usage-container">
+                            <div class="storage-progress">
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 36 36" class="circular-chart">
+                                        <path class="circle-bg"
+                                            d="M18 2.0845
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        />
+                                        <path id="storageProgressPath" class="circle"
+                                            stroke-dasharray="0, 100"
+                                            d="M18 2.0845
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        />
+                                        <text x="18" y="20.35" class="percentage" id="storagePercentage">0%</text>
+                                    </svg>
+                                </div>
+                                <div class="storage-details">
+                                    <div class="storage-detail-item">
+                                        <span class="detail-label">Used:</span>
+                                        <span class="detail-value" id="usedStorage">0 MB</span>
+                                    </div>
+                                    <div class="storage-detail-item">
+                                        <span class="detail-label">Free:</span>
+                                        <span class="detail-value" id="freeStorage">0 MB</span>
+                                    </div>
+                                    <div class="storage-detail-item">
+                                        <span class="detail-label">Total:</span>
+                                        <span class="detail-value" id="totalStorage">0 MB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Files Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-alt"></i> Recent Files</h3>
+                        <a href="files.html" class="btn-view-all">View All</a>
+                    </div>
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Filename</th>
+                                        <th>Size</th>
+                                        <th>Upload Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentFilesTable">
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            <div class="loading-spinner">
+                                                <i class="fas fa-spinner fa-spin"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Upload Section -->
+                <!-- Removed Quick Upload Section as requested -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
